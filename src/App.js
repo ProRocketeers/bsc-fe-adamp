@@ -28,7 +28,7 @@ class App extends React.Component {
               <Route path="/" exact component={NoteList} />
               <Route path="/new" exact component={NoteForm} />
               <Route path="/note/:id" exact component={NoteDetail} />
-              <Route path="/note/:id/edit" exact omponent={NoteForm} />
+              <Route path="/note/:id/edit" exact component={NoteForm} />
               <Route component={NotFound} />
             </Switch>
           </main>

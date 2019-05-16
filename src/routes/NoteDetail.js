@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { getNote } from "../network/noteConnector";
 
-export const NoteDetail = () => {
+export const NoteDetail = ({ match }) => {
   const { t } = useTranslation();
+  const [note, setNote] = useState({});
 
-  return <div>{t("language")}</div>;
+  //fetch note
+  useEffect(
+    () => {
+      (async () => setNote(await getNote(match.params.id)))();
+    },
+    [match.params.id]
+  );
+
+  return <div>{JSON.stringify(note)}</div>;
 };
