@@ -1,5 +1,3 @@
-import React from 'react';
+import React from "react";
 
-export const NoteList = () => <div>list</div>
-
-
+export const NoteList = () => <div>list</div>;

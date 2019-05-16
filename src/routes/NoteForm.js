@@ -1,5 +1,3 @@
-import React from 'react';
+import React from "react";
 
-export const NoteForm = () => <div>form</div>
-
-
+export const NoteForm = () => <div>form</div>;
