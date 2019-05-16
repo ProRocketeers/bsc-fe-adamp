@@ -1,7 +1,8 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 import App from "./App";
 import cs from "./assets/cs_i18n";
 import en from "./assets/en_i18n";

@@ -1,41 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { NoteDetail } from "./routes/NoteDetail";
-import { NoteForm } from "./routes/NoteForm";
-import { NoteList } from "./routes/NoteList";
-import { NotFound } from "./routes/NotFound";
+import { NoteDetailPage } from "./routes/NoteDetailPage";
+import { NoteFormPage } from "./routes/NoteFormPage";
+import { NoteListPage } from "./routes/NoteListPage";
+import { NotFoundPage } from "./routes/NotFoundPage";
 import i18n from "i18next";
 import { Header } from "./components/header";
 
-class App extends React.Component {
-  state = {
-    lang: "en"
-  };
+const App = () => {
+  const [lang, setLang] = useState("en");
 
-  setLanguage = lang => {
-    i18n.changeLanguage(lang, () => this.setState({ lang }));
-  };
-
-  render() {
-    return (
-      <Router>
-        <div>
-          <header>
-            <Header setLanguage={this.setLanguage} />
-          </header>
-          <main>
-            <Switch>
-              <Route path="/" exact component={NoteList} />
-              <Route path="/new" exact component={NoteForm} />
-              <Route path="/note/:id" exact component={NoteDetail} />
-              <Route path="/note/:id/edit" exact component={NoteForm} />
-              <Route component={NotFound} />
-            </Switch>
-          </main>
-        </div>
-      </Router>
-    );
-  }
-}
+  return (
+    <Router>
+      <div className="text-dark">
+        <header>
+          <Header
+            setLanguage={lang => i18n.changeLanguage(lang, () => setLang(lang))}
+          />
+        </header>
+        <main>
+          <Switch>
+            <Route path="/" exact component={NoteListPage} />
+            <Route path="/new" exact component={NoteFormPage} />
+            <Route path="/note/:id" exact component={NoteDetailPage} />
+            <Route path="/note/:id/edit" exact component={NoteFormPage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </main>
+      </div>
+    </Router>
+  );
+};
 
 export default App;
