@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NoteList = ({ notes, editNote, deleteNote, t, createNote }) => {
+export const NoteList = ({ notes, deleteNote, t }) => {
   return (
     <>
       <h1>{t("list_notes")}</h1>
@@ -31,18 +31,19 @@ export const NoteList = ({ notes, editNote, deleteNote, t, createNote }) => {
                   variant="light"
                   size="sm"
                   className="float-right"
-                  onClick={deleteNote}
+                  onClick={() => deleteNote(note.id)}
                 >
                   {t("remove_note")}
                 </Button>
-                <Button
-                  variant="light"
-                  size="sm"
-                  className="float-right mr-4"
-                  onClick={editNote}
-                >
-                  {t("edit_note")}
-                </Button>
+                <Link to={`/note/${note.id}/edit`}>
+                  <Button
+                    variant="light"
+                    size="sm"
+                    className="float-right mr-4"
+                  >
+                    {t("edit_note")}
+                  </Button>
+                </Link>
               </td>
             </tr>
           ))}

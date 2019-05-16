@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getNotes } from "../network/noteConnector";
+import { getNotes, removeNote } from "../network/noteConnector";
 import { Container } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { NoteList } from "../components/noteList";
+
+const deleteNote = async id => {
+  return await removeNote(id);
+};
 
 export const NoteListPage = () => {
   const [notes, setNotes] = useState([]);
@@ -15,7 +19,7 @@ export const NoteListPage = () => {
 
   return (
     <Container>
-      <NoteList notes={notes} t={t} />
+      <NoteList deleteNote={deleteNote} notes={notes} t={t} />
     </Container>
   );
 };

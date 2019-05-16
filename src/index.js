@@ -19,7 +19,7 @@ i18n
       }
     },
     lng: "en",
-    fallbackLng: ["en", "cs"]
+    fallbackLng: ["en", "cs"],
   });
 
 ReactDOM.render(<App />, document.getElementById("root"));

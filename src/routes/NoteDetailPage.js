@@ -4,11 +4,13 @@ import { getNote, removeNote } from "../network/noteConnector";
 import { Container } from "react-bootstrap";
 import { NoteDetail } from "../components/noteDetail";
 
-const deleteNote = async id => {
-  return await removeNote(id);
+const deleteNote = async (id, history) => {
+  const result = await removeNote(id);
+  history.push("/");
+  return result;
 };
 
-export const NoteDetailPage = ({ match }) => {
+export const NoteDetailPage = ({ match, history }) => {
   const { t } = useTranslation();
   const [note, setNote] = useState({});
 
@@ -22,7 +24,11 @@ export const NoteDetailPage = ({ match }) => {
 
   return (
     <Container>
-      <NoteDetail note={note} deleteNote={deleteNote} t={t} />
+      <NoteDetail
+        note={note}
+        deleteNote={id => deleteNote(id, history)}
+        t={t}
+      />
     </Container>
   );
 };

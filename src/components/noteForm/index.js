@@ -1,8 +1,7 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
-export const NoteForm = ({ note, setNote, saveNote, t }) => {
+export const NoteForm = ({ note, setNote, saveNote, t, goBack }) => {
   return (
     <>
       <h1>{t(note.id ? "edit_note" : "new_note")}</h1>
@@ -22,10 +21,9 @@ export const NoteForm = ({ note, setNote, saveNote, t }) => {
         />
 
         <div className="mt-4 float-right">
-          <Link to={note.id ? `/note/${note.id}` : '/'}>
-            <Button variant="secondary" className="mr-4">{t("cancel")}</Button>
-          </Link>
-
+          <Button onClick={goBack} variant="secondary" className="mr-4">
+            {t("cancel")}
+          </Button>
           <Button variant="primary" type="submit">
             {t("save")}
           </Button>
