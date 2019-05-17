@@ -1,8 +1,16 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Note } from "../../models/notes";
+import i18n from "i18next";
 
-export const NoteDetail = ({ note, deleteNote, t }) => {
+interface NoteDetailProps {
+  note: Note;
+  deleteNote(id: number): Promise<null>;
+  t: i18n.TFunction;
+}
+
+export const NoteDetail = ({ note, deleteNote, t }: NoteDetailProps) => {
   return (
     <>
       <h1>{t("detail_note")}</h1>
@@ -21,7 +29,7 @@ export const NoteDetail = ({ note, deleteNote, t }) => {
             {t("edit_note")}
           </Button>
         </Link>
-        <Button variant="danger" onClick={() => deleteNote(note.id)}>
+        <Button variant="danger" onClick={() => note.id && deleteNote(note.id)}>
           {t("remove_note")}
         </Button>
       </div>

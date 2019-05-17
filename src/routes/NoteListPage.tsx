@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { getNotes, removeNote } from "../network/noteConnector";
 import { Container } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { NoteList } from "../components/noteList";
+import { NotesList } from "../components/notesList";
+import { NoteList } from "../models/notes";
 
-const deleteNote = async id => {
+const deleteNote = async (id: string | number) => {
   return await removeNote(id);
 };
 
 export const NoteListPage = () => {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState<NoteList>([]);
   const { t } = useTranslation();
 
   //fetch notes
@@ -19,7 +20,7 @@ export const NoteListPage = () => {
 
   return (
     <Container>
-      <NoteList deleteNote={deleteNote} notes={notes} t={t} />
+      <NotesList deleteNote={deleteNote} notes={notes} t={t} />
     </Container>
   );
 };

@@ -1,26 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-import App from "./App";
-import { NoteList } from "./components/noteList";
+import { App } from "./App";
+import { NotesList } from "./components/notesList";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { shallow } from "enzyme";
 
+let t: i18n.TFunction;
+
 beforeAll(() => {
   i18n
     .use(initReactI18next) // passes i18n down to react-i18next
-    .init({
-      resources: {
-        en: { translation: {} },
-        cs: { translation: {} }
+    .init(
+      {
+        resources: {
+          en: { translation: {} },
+          cs: { translation: {} }
+        },
+        lng: "en",
+        fallbackLng: ["en", "cs"],
+        react: {
+          useSuspense: true
+        }
       },
-      lng: "en",
-      fallbackLng: ["en", "cs"],
-      react: {
-        useSuspense: true
+      (err, tFunc) => {
+        t = tFunc;
       }
-    });
+    );
 });
 
 it("renders without crashing", () => {
@@ -41,17 +47,23 @@ const notes = [
 ];
 
 it("renders list of notes correctly", () => {
-  const wrapper = shallow(<NoteList notes={notes} t={() => ""} />);
+  const wrapper = shallow(
+    <NotesList
+      deleteNote={() => new Promise<null>(() => {})}
+      notes={notes}
+      t={t}
+    />
+  );
   expect(wrapper).toContainMatchingElements(2, "tbody > tr");
   expect(
     wrapper
-      .find("tbody > tr > td > Link")
+      .find("tbody > tr > td:first-child > Link")
       .first()
       .props().children
   ).toBe(notes[0].title);
   expect(
     wrapper
-      .find("tbody > tr > td > Link")
+      .find("tbody > tr > td:first-child > Link")
       .last()
       .props().children
   ).toBe(notes[1].title);

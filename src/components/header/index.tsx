@@ -2,9 +2,13 @@ import React from "react";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Col, Row, Form } from "react-bootstrap";
+import {Col, Row, Form, FormControlProps} from "react-bootstrap";
 
-export const Header = ({ setLanguage }) => {
+interface HeaderProps {
+  setLanguage(lng?: string): void;
+}
+
+export const Header = ({ setLanguage }: HeaderProps) => {
   const { t } = useTranslation();
 
   return (
@@ -14,8 +18,13 @@ export const Header = ({ setLanguage }) => {
           <h1 className="text-light">{t("app_title")}</h1>
         </Link>
       </Col>
-      <Col xs={1} >
-        <Form.Control as="select" onChange={e => setLanguage(e.target.value)}>
+      <Col xs={1}>
+        <Form.Control
+          as="select"
+          onChange={(e: React.FormEvent<FormControlProps>): void => {
+            setLanguage(e.currentTarget.value);
+          }}
+        >
           {i18n.languages.map(lang => (
             <option key={lang}>{lang}</option>
           ))}

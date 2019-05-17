@@ -7,7 +7,7 @@ import { NotFoundPage } from "./routes/NotFoundPage";
 import i18n from "i18next";
 import { Header } from "./components/header";
 
-const App = () => {
+export const App = () => {
   const [lang, setLang] = useState("en");
 
   return (
@@ -15,7 +15,7 @@ const App = () => {
       <div className="text-dark">
         <header>
           <Header
-            setLanguage={lang => i18n.changeLanguage(lang, () => setLang(lang))}
+            setLanguage={(lang: string) => i18n.changeLanguage(lang, () => setLang(lang))}
           />
         </header>
         <main>
@@ -31,5 +31,3 @@ const App = () => {
     </Router>
   );
 };
-
-export default App;

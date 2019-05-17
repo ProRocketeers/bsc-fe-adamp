@@ -3,6 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/enzyme": "^3.9.2",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/i18next": "^12.1.0",
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.2",
+    "@types/react": "^16.8.17",
+    "@types/react-bootstrap": "^0.32.17",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.3",
     "bootstrap": "^4.3.1",
     "i18next": "^15.1.1",
     "react": "^16.8.6",
@@ -11,7 +20,8 @@
     "react-i18next": "^10.9.0",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "start": "PORT=9000 react-scripts start",
